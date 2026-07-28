@@ -1,4 +1,3 @@
--- with "..\..\..\..\boards\MicroBit_v2\microbit_v2_zfp.gpr";
 with "../../../../boards/MicroBit_v2/microbit_v2_zfp.gpr";
 
 project Accelerometer is
@@ -8,7 +7,6 @@ project Accelerometer is
    for Main use ("main.adb");
    for Target use "arm-eabi";
    for Runtime ("Ada") use MicroBit_v2_ZFP'Runtime ("Ada");
-   -- for Runtime ("ada") use "zfp-cortex-m4f";
 
    package Linker is
      for Switches ("Ada") use
@@ -16,7 +14,6 @@ project Accelerometer is
        ("-Wl,--print-memory-usage",
         "-Wl,--gc-sections",
         "-U__gnat_irq_trap");
-      -- for Switches ("ada") use ("-T", "..\..\..\..\boards\MicroBit_v2\src\zfp\link.ld", "-Wl,--print-memory-usage", "-Wl,--gc-sections", "-U__gnat_irq_trap", "-g");
    end Linker;
 
    package Ide is

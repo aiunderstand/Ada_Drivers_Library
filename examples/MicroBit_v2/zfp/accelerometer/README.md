@@ -38,3 +38,19 @@ if Data.Y < -200 then
    --  The micro:bit is vertical
 end if;
 ```
+
+A simple Python program can be used to show the orientation of
+the micro:bit in a 3D volume.
+
+```console
+$ python3 display.py -h
+
+usage: display.py [-h] --port PORT [--baudrate BAUDRATE]
+
+Display micro:bit orientation as a 3D arrow using accelerometer data.
+
+options:
+  -h, --help           show this help message and exit
+  --port PORT          Serial port device filename
+  --baudrate BAUDRATE  Baudrate for the serial port
+```
