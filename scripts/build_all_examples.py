@@ -135,7 +135,6 @@ projects = [
 
             # MicroBit v2
 			"/boards/MicroBit_v2/microbit_v2_zfp.gpr",
-			"/boards/MicroBit_v2/microbit_v2_sfp.gpr",
 			"/boards/MicroBit_v2/microbit_v2_full.gpr",
             "/examples/MicroBit_v2/text_scrolling/text_scrolling.gpr",
 			"/examples/MicroBit_v2/buttons/buttons.gpr",

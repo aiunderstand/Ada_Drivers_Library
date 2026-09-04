@@ -1,4 +1,4 @@
-with "..\..\..\..\boards\MicroBit_v2\microbit_v2_zfp.gpr";
+with "../../../../boards/MicroBit_v2/microbit_v2_zfp.gpr";
 
 project Motor_Drive_Calibration is
 
@@ -7,11 +7,15 @@ project Motor_Drive_Calibration is
    for Main use ("main.adb");
 
    package Linker is
-      for Switches ("ada") use ("-T", "..//..//..//..//boards//MicroBit_v2//src//zfp//link.ld", "-Wl,--print-memory-usage", "-Wl,--gc-sections", "-U__gnat_irq_trap", "-g");
+     for Switches ("Ada") use
+       MicroBit_v2_ZFP.Linker_Switches &
+       ("-Wl,--print-memory-usage",
+        "-Wl,--gc-sections",
+        "-U__gnat_irq_trap");
    end Linker;
 
    for Target use "arm-eabi";
-   for Runtime ("ada") use "zfp-cortex-m4f";
+   for Runtime ("Ada") use MicroBit_v2_ZFP'Runtime ("Ada");
 
    package Ide is
       for Connection_Tool use "pyocd";

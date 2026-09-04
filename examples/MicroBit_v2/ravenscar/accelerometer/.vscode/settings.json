@@ -1,4 +1,0 @@
-{
-    "cortex-debug.armToolchainPrefix": "arm-eabi"
-	"sarif-viewer.connectToGithubCodeScanning": "off"
-}
