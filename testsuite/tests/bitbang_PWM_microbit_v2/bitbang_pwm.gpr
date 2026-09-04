@@ -1,4 +1,4 @@
-with "..\..\..\boards\MicroBit_v2\microbit_v2_zfp.gpr";
+with "../../../boards/MicroBit_v2/microbit_v2_zfp.gpr";
 
 project Bitbang_Pwm is
 
@@ -6,7 +6,7 @@ project Bitbang_Pwm is
    for Object_Dir use "obj";
    for Main use ("main.adb");
    for Target use "arm-eabi";
-   for Runtime ("ada") use "zfp-cortex-m4f";
+   for Runtime ("Ada") use MicroBit_v2_ZFP'Runtime ("Ada");
 
    package Ide is
       for Connection_Tool use "pyocd";
@@ -15,7 +15,11 @@ project Bitbang_Pwm is
    end Ide;
 
    package Linker is
-      for Switches ("ada") use ("-T", "C://Users//maxde//Documents//git-repos//Ada_Drivers_Library//boards//MicroBit_v2///src/zfp/link.ld", "-Wl,--print-memory-usage", "-Wl,--gc-sections", "-U__gnat_irq_trap", "-g");
+      for Switches ("ada") use
+       MicroBit_v2_ZFP.Linker_Switches &
+       ("-Wl,--print-memory-usage",
+        "-Wl,--gc-sections",
+        "-U__gnat_irq_trap");
    end Linker;
 
    package Compiler is

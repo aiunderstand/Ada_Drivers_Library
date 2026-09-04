@@ -1,4 +1,4 @@
-limited with "..//..//..//..//boards//MicroBit_v2//microbit_v2_full.gpr";
+with "..//..//..//..//boards//MicroBit_v2//microbit_v2_full.gpr";
 
 project Default is
 

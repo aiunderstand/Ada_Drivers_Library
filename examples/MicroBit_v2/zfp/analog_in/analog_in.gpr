@@ -6,10 +6,14 @@ project Analog_In is
    for Object_Dir use "obj";
    for Main use ("main.adb");
    for Target use "arm-eabi";
-   for Runtime ("ada") use "zfp-cortex-m4f";
+   for Runtime ("Ada") use MicroBit_v2_ZFP'Runtime ("Ada");
 
    package Linker is
-      for Switches ("ada") use ("-T", "..\..\..\..\boards\MicroBit_v2\src\zfp\link.ld", "-Wl,--print-memory-usage", "-Wl,--gc-sections", "-U__gnat_irq_trap", "-g");
+     for Switches ("Ada") use
+       MicroBit_v2_ZFP.Linker_Switches &
+       ("-Wl,--print-memory-usage",
+        "-Wl,--gc-sections",
+        "-U__gnat_irq_trap");
    end Linker;
 
    package Ide is
