@@ -1,0 +1,12 @@
+--  Configuration pragmas for proving tasking code.
+--
+--  SPARK only analyses tasks and protected objects when the tasking profile and
+--  the elaboration policy are pinned down (SPARK RM 9(2)), because both affect
+--  what concurrency is possible. Without these, GNATprove reports:
+--
+--    error: tasking in SPARK requires sequential elaboration (SPARK RM 9(2))
+--
+--  These match what the board actually runs: the embedded-nrf52833 runtime is a
+--  Ravenscar-profile runtime.
+pragma Profile (Ravenscar);
+pragma Partition_Elaboration_Policy (Sequential);
