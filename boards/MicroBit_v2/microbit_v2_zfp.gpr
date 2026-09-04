@@ -62,7 +62,8 @@ library project MicroBit_v2_ZFP is
 
    Linker_Switches := ("-T", Project'Project_dir & "/src/zfp/link.ld");
    for Target use "arm-eabi";
-   for Runtime ("Ada") use "zfp-cortex-m4f";
+   -- for Runtime ("Ada") use "zfp-cortex-m4f";
+   for Runtime ("Ada") use "light-cortex-m4f";
 
    package Device_Configuration is
       for CPU_Name use "ARM Cortex-M4F";
