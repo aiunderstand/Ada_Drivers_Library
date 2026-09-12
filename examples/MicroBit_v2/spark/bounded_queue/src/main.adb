@@ -23,6 +23,7 @@ with MicroBit.Console;   use MicroBit.Console;
 with MicroBit.Buttons;   use MicroBit.Buttons;
 with MicroBit.DisplayRT;
 with Ring_Buffer;        use Ring_Buffer;
+with MicroBit.TimeWithRTC1; use MicroBit.TimeWithRTC1;
 
 procedure Main is
    Queue : Buffer := Empty_Buffer;
@@ -30,15 +31,19 @@ procedure Main is
    Value : Item;
 begin
    Put_Line ("SPARK bounded queue. A = push, B = pop.");
-
+      
    loop
+      Delay_Ms (500);
+
       if MicroBit.Buttons.State (Button_A) = Pressed then
          --  The guard is what discharges Push's precondition.
          if Is_Full (Queue) then
+            MicroBit.DisplayRT.Clear;
             MicroBit.DisplayRT.Display ('F');
             Put_Line ("full");
          else
             Push (Queue, Next);
+            MicroBit.DisplayRT.Clear;
             MicroBit.DisplayRT.Display (Character'Val (Character'Pos ('0') + Length (Queue)));
             Put_Line ("pushed" & Item'Image (Next) & ", length" & Count_Type'Image (Length (Queue)));
             Next := (if Next = Item'Last then 0 else Next + 1);
@@ -46,10 +51,12 @@ begin
 
       elsif MicroBit.Buttons.State (Button_B) = Pressed then
          if Is_Empty (Queue) then
+            MicroBit.DisplayRT.Clear;
             MicroBit.DisplayRT.Display ('E');
             Put_Line ("empty");
          else
             Pop (Queue, Value);
+            MicroBit.DisplayRT.Clear;
             MicroBit.DisplayRT.Display (Character'Val (Character'Pos ('0') + Length (Queue)));
             Put_Line ("popped" & Item'Image (Value) & ", length" & Count_Type'Image (Length (Queue)));
          end if;
