@@ -162,11 +162,17 @@ package body nRF.UART is
             null;
          end loop;
 
+         --  Clear the event *before* reading RXD. Reading RXD pops one byte
+         --  from the RX FIFO, and if more bytes are already waiting the
+         --  peripheral raises RXDRDY again for them; clearing after the read
+         --  wiped that flag, so a burst of input ("hello" pasted into a
+         --  console) left the loop waiting for an event that had already
+         --  fired, with the rest of the line stuck in the FIFO until a
+         --  reset. Nordic's own driver clears first, then reads.
+         UART0_Periph.EVENTS_RXDRDY := 0;
+
          --  Read a character
          C := This.Periph.RXD.RXD;
-
-         --  Clear the RX event for the character we just received
-         UART0_Periph.EVENTS_RXDRDY := 0;
       end loop;
 
       Status := HAL.UART.Ok;
